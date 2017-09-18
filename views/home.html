@@ -1,0 +1,33 @@
+{{template "header"}}
+    <title>首页-我的beego 博客</title>
+</head>
+<body>
+<nav  class="navbar navbar-inverse">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</nav >
+<div class="container">
+  <div class="col-md-7">
+      {{range .Topics}}
+      <div class="page-header">
+          <h2>{{.Title}}</h2>
+          <h6 class="text-muted">文章发布于 {{.Create}}；共有 {{.Views}} 次浏览，{{.ReplyCount}}个评论</h6>
+          <p>{{.Content}}</p>
+      </div>
+      {{end}}
+  </div>
+    <div class="col-md-3">
+        <h3>文章分类</h3>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/">全部</a> </li>
+            {{range .Categories}}
+                <li class="list-group-item"><a href="/?cate={{.Title}}">{{.Title}}</a> </li>
+            {{end}}
+        </ul>
+    </div>
+</div>
+<!--<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.slim.min.map" type="text/javascript" ></script>
+<script src="/static/js/bootstrap.min.js" type="text/javascript" ></script>-->
+</body>
+</html>

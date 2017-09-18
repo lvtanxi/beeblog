@@ -1,0 +1,53 @@
+{{template "header"}}
+<title>分类-我的beego 博客</title>
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</div>
+<div class="container page-header">
+    <h2>分类列表</h2>
+    <form method="get" action="/category">
+        <div class="form-group">
+            <label for="exampleInputEmail1">分类名称</label>
+            <input type="text" id="exampleInputEmail1" placeholder="请输入分类名称"
+                   class="form-control" name="name">
+        </div>
+        <input type="hidden" name="op" value="add">
+        <button type="submit" class="btn btn-success" onclick="checkInput(window);">添加</button>
+    </form>
+    <table class="table  table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>文章数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{range .Categories}}
+            <tr>
+                <td>{{.Id}}</td>
+                <td>{{.Title}}</td>
+                <td>{{.TopicCount}}</td>
+                <td><a href="/category?op=del&id={{.Id}}"  class="btn btn-default"  role="button">删除</a></td>
+            </tr>
+            {{end}}
+
+        </tbody>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+    function checkInput(window) {
+        var uname = document.getElementById("exampleInputEmail1");
+        if(uname.value.length == 0) {
+            alert("请输入分类名称")
+            window.event.preventDefault()
+        }
+    }
+</script>
+</html>

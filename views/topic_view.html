@@ -1,0 +1,45 @@
+{{template "header"}}
+<title>{{.Topic.Title}}-我的beego 博客</title>
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</div>
+
+<div class="container page-header">
+    <h2>{{.Topic.Title}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/topic/modify?tid={{.Tid}}" class="btn btn-default small">修改文章</a></h2>
+    <p>
+        {{range .Labels}}
+        <a href="/?label={{.}}"><span class="badge">{{.}}</span></a>
+        {{end}}
+    </p>
+    {{.Topic.Content}}
+    <p> 文章附件(<a href="/static/upload/{{.Topic.Attachment}}">{{.Topic.Attachment}}</a> )</p>
+</div>
+<div class="container">
+    {{range .Replies}}
+    <h4>{{.Name}}&nbsp;&nbsp;&nbsp;<small>{{.Create}}</small>
+        <a href="/reply/delete/{{.Id}}/{{.Tid}}">
+            <small>删除</small>
+        </a></h4>
+    <p>{{.Content}}</p>
+    {{end}}
+    <h3>文章回复</h3>
+    <form method="post" action="/reply/add">
+        <input type="hidden" name="tid" value="{{.Tid}}">
+        <div class="form-group">
+            <label for="nickname">显示昵称</label>
+            <input type="text" class="form-control" name="nickname" id="nickname">
+        </div>
+        <div class="form-group">
+            <label for="reCon">内容</label>
+            <textarea class="form-control" name="content" id="reCon" cols="10" rows="3"
+                      style="resize: none"></textarea>
+        </div>
+        <input type="submit" class="btn btn-default" value="提交回复">
+    </form>
+</div>
+</body>
+</html>

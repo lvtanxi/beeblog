@@ -1,0 +1,65 @@
+{{template "header"}}
+<title>
+    {{if .Tid}}
+        修改文章-我的beego 博客
+    {{else}}
+        文章添加-我的beego 博客
+    {{end}}</title>
+</head>
+<body>
+<nav  class="navbar navbar-inverse">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</nav >
+<div class="container" style="width: 500px;">
+    <h2>
+        {{if .Tid}}
+            修改文章
+        {{else}}
+            文章添加
+        {{end}}
+    </h2>
+    <form method="post" action="/topic" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">文章标题：</label>
+            <input type="text" id="title" placeholder="请输入文章标题"
+                   class="form-control" name="title" value="{{.Topic.Title}}">
+        </div>
+        <div>
+            <label for="category">文章分类：</label>
+            <input id="category" name="category" class="form-control" value="{{.Topic.Category}}" placeholder="请输入文章分类">
+        </div>
+        <div>
+            <label for="label">文章标签：</label>
+            <input id="label" name="label" class="form-control" value="{{.Topic.Labels}}" placeholder="请输入文章标签">
+        </div>
+        <input type="hidden" value="{{.Tid}}" name="tid">
+        <div class="form-group">
+            <label for="content">文章内容</label>
+            <textarea class="form-control" placeholder="请输入文章内容" id="content"  name="content" cols="30" rows="10" style="resize: none">{{.Topic.Content}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="attachment">文章附件(<a href="/static/upload/{{.Topic.Attachment}}">{{.Topic.Attachment}}</a> )</label>
+            <input type="file" id="attachment" name="attachment" class="form-control">
+        </div>
+                <button type="submit" class="btn btn-success" onclick="checkInput(window);">提交</button>
+
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    function checkInput(window) {
+        var uname = document.getElementById("title");
+        if(uname.value.length == 0) {
+            alert("请输入文章标题")
+            window.event.preventDefault()
+        }
+        var pwd = document.getElementById("content");
+        if(pwd.value.length == 0) {
+            alert("请输入文章内容")
+            window.event.preventDefault()
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,44 @@
+{{template "header"}}
+<title>文章-我的beego 博客</title>
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</div>
+<div class="container page-header">
+    <h2>文章列表</h2>
+    <a class="btn btn-info" href="/topic/add">添加文章</a>
+    <table class="table  table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>文章名称</th>
+            <th>最后更新</th>
+            <th>浏览</th>
+            <th>回复数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{range .Topics}}
+            <tr>
+                <td>{{.Id}}</td>
+                <td>{{.Title}}</td>
+                <td>{{.Update}}</td>
+                <td>{{.Views}}</td>
+                <td>{{.ReplyCount}}</td>
+                <td>
+                    <a class="btn btn-info" href="/topic/view/{{.Id}}">详情</a>
+                    <a href="/topic/modify?tid={{.Id}}" class="btn btn-default ">修改</a>
+                    <a class="btn btn-danger" href="/topic/delete/{{.Id}}">删除</a>
+                </td>
+            </tr>
+            {{end}}
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
